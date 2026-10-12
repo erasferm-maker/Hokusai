@@ -1,0 +1,456 @@
+/* Layout: copia 1:1 del frame Figma "Hokusai_2" (1920 × 5135), posiciones absolutas, escalado al ancho de la ventana */
+:root {
+  --paper: #f3ede1;
+  --ink: #2e2f31;
+  --ink-body: #222327;
+  --navy: #030f28;
+  --navy-text: #04112e;
+  --nav: #051439;
+  --info: #030c25;
+  --red: #df2f1c;
+  --red-sq: #f34239;
+  --sky: #a9bbbe;
+  --sand: #d4ccc5;
+  --cream: #f7f3d5;
+  --f-display: "Kings", "Brush Script MT", cursive;
+  --f-body: "Kumbh Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+html, body { background: var(--paper); }
+body { margin: 0; overflow-x: hidden; }
+
+/* Anchos del portafolio: contenido de 1516.6px sobre 1920 (bordes en 201.7 y 1718.3).
+   Hasta 1920 todo escala con la ventana; desde 1920 el contenido queda fijo y centrado
+   (--ox) y solo los fondos se estiran a todo el ancho. */
+#viewport { position: relative; width: 100%; overflow: hidden; height: calc((5135px + var(--y3, 0px)) * var(--s, 1)); }
+#canvas {
+  position: absolute; left: 0; top: 0;
+  width: var(--D, 1920px); height: calc(5135px + var(--y3, 0px));
+  background: var(--paper);
+  overflow: hidden;
+  transform-origin: 0 0;
+  transform: scale(var(--s, 1));
+}
+#canvas * { box-sizing: border-box; }
+.abs { position: absolute; }
+.clip { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.clip img, .abs > img { position: absolute; max-width: none; display: block; }
+.body-font { font-family: var(--f-body); font-variation-settings: "YOPQ" 300; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+
+/* Contenido: se desplaza al centro cuando la pantalla supera 1920px */
+#exhibition, #brand, #life, #portrait, .sq, #photo, #footer, #nav, #info-card, #infos { margin-left: var(--ox, 0px); }
+/* Todo lo que está debajo del hero baja si el grabado crece */
+#exhibition { margin-top: var(--oy, 0px); }
+#life, #portrait, .sq, #photo, #band-sky, #band-navy { margin-top: var(--y1, 0px); }
+/* Espacio extra si "The life of a master" necesita más alto (--oy2) o la tarjeta de Infos (--oy3) */
+#wave, #info-card, #infos { margin-top: var(--y2, 0px); }
+#footer, #footer-bg { margin-top: var(--y3, 0px); }
+
+/* 83:148 */
+#sky-grad { left: -27px; top: 0; width: calc(100% + 32px); height: 440px; background: linear-gradient(to top, #f2ece0, #758984); }
+/* 84:173 wave */
+#wave { left: -56px; top: 3839px; width: calc(100% + 122px); height: calc(941px + var(--oy3, 0px)); }
+#wave .grad { position: absolute; inset: 0; background: linear-gradient(to top, var(--cream), var(--sky)); }
+#wave img { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+/* 82:119 hero image (el sol va dentro del grabado para seguir sobre el monte Fuji) */
+/* El grabado ocupa siempre todo el ancho con su proporción; por encima de 1920 crece
+   hacia abajo y el resto de la página baja lo mismo (--oy), así no tapa ningún texto. */
+#hero { left: 0; top: 0; width: calc(100% + 2px); height: calc(2219px + var(--y1, 0px)); }
+#hero-art { position: absolute; left: 0.02%; top: 446.6px; width: 101.9%; aspect-ratio: 2000 / 2457; }
+#hero-art > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; max-width: none; }
+/* 82:110 footer band */
+#footer-bg { left: -13px; top: 4771px; width: calc(100% + 32px); height: 364px; background: var(--navy); }
+
+/* 83:149 The Exhibition */
+#exhibition { left: 201.7px; top: 1775px; width: 1516.6px; display: flex; flex-direction: column; align-items: center; gap: 37px; text-align: center; word-break: break-word; }
+#exhibition h2 { margin: 0; height: 86px; width: 100%; display: flex; flex-direction: column; justify-content: center; font: 400 140px/34px var(--f-display); letter-spacing: 2.8px; color: var(--ink); }
+#exhibition .txt { width: 100%; font-size: 24px; line-height: 44px; color: var(--ink-body); white-space: pre-wrap; font-weight: 400; }
+
+/* 83:147 logo + CTA */
+#brand { left: 170.4px; top: 245px; width: 772px; display: flex; flex-direction: column; align-items: center; }
+#brand .logo { position: relative; width: 734px; height: 337px; flex-shrink: 0; }
+#brand .logo img { height: 100%; left: -0.07%; top: 0.04%; width: 100.08%; }
+
+.btn {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  padding: 10px; border-radius: 5px; border: 2px solid;
+  background: var(--red); filter: drop-shadow(0 0 15px #fff);
+  color: #fff; text-align: center; cursor: pointer;
+}
+.btn span { flex-shrink: 0; height: 56px; display: flex; flex-direction: column; justify-content: center; font-weight: 600; font-size: 20px; line-height: 44px; }
+.btn:focus-visible { outline: 3px solid var(--nav); outline-offset: 4px; }
+#cta-hero { width: 260px; height: 60px; border-color: #0c1c40; }
+#cta-hero span { width: 256.129px; }
+
+/* 82:123 */
+#band-sky { left: 0; top: 2460px; width: calc(100% + 2px); height: calc(1409px + var(--oy2, 0px)); background: var(--sky); }
+
+/* 82:126 The life of a master */
+#life { left: 201.7px; top: 3020px; width: 871px; display: flex; flex-direction: column; align-items: flex-start; gap: 58px; color: var(--navy-text); word-break: break-word; }
+#life h2 { margin: 0; width: 100%; font-family: var(--f-display); font-weight: 400; display: flex; flex-direction: column; justify-content: flex-end; }
+#life h2 .l { display: block; line-height: 89px; }
+#life h2 .s80 { font-size: 80px; letter-spacing: 1.6px; line-height: 89px; }
+#life h2 .s90 { font-size: 90px; letter-spacing: 1.8px; line-height: 89px; }
+#life h2 .s135 { font-size: 135px; letter-spacing: 2.7px; line-height: 89px; }
+#life .txt { width: 100%; font-size: 24px; line-height: 35px; text-align: justify; letter-spacing: -0.48px; font-weight: 400; white-space: pre-wrap; }
+
+/* 82:138 portrait */
+#portrait { left: 1164.7px; top: 3008px; width: 553.6px; height: 732.9px; }
+#portrait img { inset: 0; width: 100%; height: 100%; }
+
+/* 84:152 */
+#band-navy { left: -10px; top: 2366px; width: calc(100% + 18px); height: 286px; background: var(--ink); }
+
+/* 84:157 squares */
+.sq { position: absolute; }
+
+/* 83:150 exhibition photo */
+#photo { left: 201.7px; top: 2194px; width: 1516.6px; height: 626px; }
+#photo img { left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 72%; }
+
+/* 84:171 footer */
+#footer { left: 244px; top: 4832px; width: 1438px; display: flex; flex-direction: column; align-items: center; }
+#footer .logo { position: relative; width: 216px; height: 89px; flex-shrink: 0; }
+#footer .logo img { height: 100%; left: 5.07%; top: 0.04%; width: 89.8%; }
+#sponsors { position: relative; width: 1438px; height: 129px; flex-shrink: 0; }
+#sponsors .sp { position: absolute; }
+#sponsors .sp .clip img { position: absolute; }
+
+/* 84:175 sun */
+#sun { position: absolute; left: 61.35%; top: -6.883%; width: 16.59%; aspect-ratio: 1; }
+#sun img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* 331:15 nav */
+#nav { left: 201.7px; top: 71px; width: 1516.6px; display: flex; align-items: center; justify-content: space-between; }
+#nav .expo { position: relative; width: 117.123px; height: 64.081px; flex-shrink: 0; }
+#nav .expo img { height: 113.18%; left: 4.7%; top: -2.09%; width: 89.8%; }
+#nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 100px; font-weight: 500; font-size: 24px; line-height: 44px; color: var(--nav); text-align: center; white-space: nowrap; }
+#nav a:focus-visible { outline: 2px solid var(--nav); outline-offset: 4px; }
+
+/* 385:38 info card */
+#info-card {
+  left: 918.3px; top: 4062px; width: 800px; height: calc(570px + var(--oy3, 0px));
+  border: 1px solid #fff; border-radius: 15px;
+  box-shadow: 0 0 30px 0 rgba(255,255,255,0.1), 0 10px 30px -6px rgba(3,15,40,0.28);
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 800 570' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.18000000715255737'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(80.408 57.2 -80.281 243.87 -13.605 12)'><stop stop-color='rgba(255,255,255,1)' offset='0'/><stop stop-color='rgba(243,243,243,1)' offset='1'/></radialGradient></defs></svg>");
+  background-size: 100% 100%;
+}
+#info { left: 989px; top: 4120px; width: 689px; display: flex; flex-direction: column; align-items: center; gap: 48px; }
+#info h2 { margin: 0; height: 77px; width: 100%; display: flex; flex-direction: column; justify-content: center; font: 400 80px/80px var(--f-display); color: var(--info); text-align: center; word-break: break-word; }
+#info .txt { width: 601.493px; height: 225.675px; display: flex; flex-direction: column; justify-content: center; font-size: 24px; line-height: 35px; letter-spacing: -0.24px; text-align: center; color: var(--info); font-weight: 400; white-space: pre-wrap; }
+#cta-info { width: 239.492px; height: 55.267px; border-color: #000; }
+#cta-info span { width: 256.593px; }
+
+/* ===== Interacciones ===== */
+/* Sol: pulso sobre su propio eje */
+#sun img { transform-origin: 50% 50%; animation: sun-pulse 2.5s ease-in-out infinite; }
+@keyframes sun-pulse { 0%, 100% { transform: scale(0.85); } 50% { transform: scale(1.14); } }
+
+/* Botones: crecen + azul oscuro con borde rojo */
+.btn { transition: transform .3s ease, background-color .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.btn:hover, .btn:focus-visible { transform: scale(1.08); background: #0c1c40; border-color: var(--red); }
+
+/* Imágenes: agrandado al pasar el mouse */
+#photo, #portrait { transition: transform .5s ease; transform-origin: 50% 50%; }
+#photo:hover, #portrait:hover { transform: scale(1.04); }
+#photo img { transition: transform .6s ease; }
+#photo:hover img { transform: scale(1.06); }
+
+/* Navegación: logo y enlaces crecen al pasar el mouse */
+#nav .expo, #nav ul a { display: inline-block; transition: transform .3s ease; transform-origin: 50% 50%; }
+#nav .expo:hover, #nav .expo:focus-visible,
+#nav ul a:hover, #nav ul a:focus-visible { transform: scale(1.12); }
+
+/* Cuadros decorativos de las fotos */
+.sq { transition: transform .4s ease; transform-origin: 50% 50%; }
+.sq:hover { transform: scale(1.15); }
+
+/* Efecto cristal en Infos & reservations */
+#info-card {
+  background-color: rgba(255,255,255,0.10);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Textos: flotan desde abajo y se agrandan al aparecer */
+.reveal.pre { opacity: 0; transform: translateY(80px) scale(0.85); }
+.reveal.in { animation: float-up 1.1s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes float-up {
+  0%   { opacity: 0; transform: translateY(80px) scale(0.85); }
+  70%  { opacity: 1; transform: translateY(-6px) scale(1.04); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Párrafos: 18px reales en pantalla en todo desktop (se compensa el escalado del lienzo),
+   con interlineado amplio (1.7) y sin espaciado negativo para que el texto respire. */
+#exhibition .txt { font-size: calc(var(--pf, 18px) / var(--s, 1)); line-height: calc(var(--pl, 28px) / var(--s, 1)); letter-spacing: 0; max-width: calc(900px / var(--ts, 1)); }
+#life .txt { font-size: calc(var(--pf, 18px) / var(--s, 1)); line-height: calc(var(--pl, 28px) / var(--s, 1)); letter-spacing: 0; }
+#life .txt p { line-height: inherit; }
+#infos .txt { font-size: calc(var(--pf, 18px) / var(--s, 1)) !important; line-height: calc(var(--pl, 28px) / var(--s, 1)) !important; letter-spacing: 0 !important; height: auto !important; }
+#infos .txt p { line-height: inherit; }
+
+/* =====================================================================
+   TABLET — copia del frame Figma "iPad mini 8.3 - 2" (744 × 4638).
+   Se usa por debajo de 1280px (regla del portafolio); escala al ancho.
+   ===================================================================== */
+#canvas-t {
+  display: none; position: absolute; left: 0; top: 0;
+  width: 744px; height: calc(4638px + var(--tH, 0px) + var(--tB, 0px) + var(--t0, 0px) + var(--tP, 0px) + var(--t1, 0px) + var(--tR, 0px) + var(--t2, 0px)); background: var(--paper); overflow: hidden;
+  transform-origin: 0 0; transform: scale(var(--st, 1));
+}
+#canvas-t * { box-sizing: border-box; }
+/* --tH: el contenido sube para quedar a la misma distancia del menú que en el Figma */
+/* --tB: hero compacto como en móvil (sol detrás del logo); --tP: foto de la expo más baja (formato 16:9) */
+#canvas-t .t-top { margin-top: var(--tH, 0px); }
+#canvas-t .t-top2 { margin-top: calc(var(--tH, 0px) + var(--tB, 0px)); }
+#canvas-t .t-ex { margin-top: calc(var(--tH, 0px) + var(--tB, 0px) + var(--t0, 0px)); }
+#canvas-t .t-ap { margin-top: calc(var(--tH, 0px) + var(--tB, 0px) + var(--t0, 0px) + var(--tP, 0px)); }
+#canvas-t .t-life { margin-top: calc(var(--tH, 0px) + var(--tB, 0px) + var(--t0, 0px) + var(--tP, 0px) + var(--t1, 0px)); }
+#canvas-t .t-ar { margin-top: calc(var(--tH, 0px) + var(--tB, 0px) + var(--t0, 0px) + var(--tP, 0px) + var(--t1, 0px) + var(--tR, 0px)); }
+#canvas-t .t-card { margin-top: calc(var(--tH, 0px) + var(--tB, 0px) + var(--t0, 0px) + var(--tP, 0px) + var(--t1, 0px) + var(--tR, 0px) + var(--t2, 0px)); }
+.mode-t #canvas { display: none; }
+.mode-t #canvas-t { display: block; }
+
+#t-sky-band { left: -28px; top: 2289px; width: 789px; height: calc(1464px + 4px + var(--t1, 0px) + var(--tR, 0px)); background: var(--sky); }
+#t-hero { left: -605px; top: 273px; width: 1386px; height: 1429px; }
+#t-hero img { height: 114.37%; left: -6.71%; top: 13.53%; width: 106.74%; }
+#t-sky-grad { left: -12px; top: 0; width: 767px; height: calc(466px + var(--tH, 0px) + var(--tB, 0px)); background: linear-gradient(to top, #f2ece0, #758984); }
+#t-sun { left: 281.43px; top: 165px; width: 181.199px; height: 181.199px; }
+#t-sun img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transform-origin: 50% 50%; animation: sun-pulse 2.5s ease-in-out infinite; }
+
+#t-brand { left: 195.97px; top: 358px; width: 352.054px; display: flex; flex-direction: column; align-items: center; gap: 17px; }
+#t-brand .logo { position: relative; width: 100%; aspect-ratio: 734 / 337; flex-shrink: 0; }
+#t-brand .logo img { height: 100%; left: -0.07%; top: 0.04%; width: 100.08%; }
+#t-cta-hero { width: 248px; height: 60px; border-color: #0c1c40; filter: drop-shadow(0 0 2.5px rgba(255,255,255,0.5)); }
+#t-cta-hero span { width: 248px; font-size: 18px; }
+
+#t-expo { position: absolute; left: 37.2px; top: calc(36px / var(--tst, 1)); width: calc(110px / var(--tst, 1)); height: calc(60px / var(--tst, 1)); display: block; transition: transform .3s ease; }
+#t-expo img { height: 113.18%; left: 4.7%; top: -2.09%; width: 89.8%; }
+#t-burger { position: absolute; left: calc(706.8px - 52px / var(--tst, 1)); top: calc(40px / var(--tst, 1)); width: calc(52px / var(--tst, 1)); height: calc(52px / var(--tst, 1)); padding: 0; border: 0; background: none; cursor: pointer; transition: transform .3s ease; }
+#t-burger img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* Logo y hamburguesa a tamaño fijo en pantalla (110×60 y 52px), como en móvil */
+#t-expo:hover, #t-expo:focus-visible, #t-burger:hover, #t-burger:focus-visible { transform: scale(1.12); }
+#t-burger:focus-visible, #t-expo:focus-visible { outline: 2px solid var(--nav); outline-offset: 4px; }
+
+#t-exhibition { left: 66.96px; top: 1395px; width: 610.08px; display: flex; flex-direction: column; align-items: center; gap: 37px; word-break: break-word; }
+#t-exhibition h2 { margin: 0; white-space: nowrap; text-align: center; font: 400 70px/34px var(--f-display); letter-spacing: 1.4px; color: var(--ink); }
+#t-exhibition .txt { width: 100%; font-weight: 500; color: var(--ink-body); white-space: pre-wrap;
+  font-size: calc(var(--pf, 18px) / var(--st, 1)); line-height: calc(var(--pl, 28px) / var(--st, 1)); letter-spacing: 0; }
+
+.t-sq { position: absolute; transition: transform .4s ease; transform-origin: 50% 50%; }
+.t-sq:hover { transform: scale(1.15); }
+/* Los rectángulos crema del retrato van por encima de la ola, que empieza a su altura */
+#canvas-t .t-sq.t-life, #canvas-m .m-sq.after-life { z-index: 3; }
+.t-band { position: absolute; left: -28px; width: 809px; height: 228px; background: var(--navy); }
+
+#t-photo { left: 66.96px; top: 1804px; width: 610.08px; height: 343.6px; border-radius: 5px; transition: transform .5s ease; }
+#t-photo .clip { border-radius: 5px; }
+#t-photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+#t-photo:hover { transform: scale(1.04); }
+#t-photo:hover img { transform: scale(1.06); }
+
+#t-life { left: 66.96px; top: 2433px; width: 610.08px; display: flex; flex-direction: column; align-items: flex-start; gap: 31px; color: var(--navy-text); word-break: break-word; }
+#t-life h2 { margin: 0; width: 100%; text-align: center; font: 400 70px/60px var(--f-display); letter-spacing: 1.4px; }
+#t-life .txt { width: 100%; font-weight: 500;
+  font-size: calc(var(--pf, 18px) / var(--st, 1)); line-height: calc(var(--pl, 28px) / var(--st, 1)); letter-spacing: 0; }
+
+#t-portrait { left: 248px; top: 3088px; width: 248px; height: 321.5px; transition: transform .5s ease; }
+#t-portrait img { inset: 0; width: 100%; height: 100%; }
+#t-portrait:hover { transform: scale(1.04); }
+
+#t-wave { left: -205px; top: 3753px; width: 1401px; height: calc(646px + var(--t2, 0px)); }
+#t-wave .grad { position: absolute; inset: 0; background: linear-gradient(to top, var(--cream) 32.218%, var(--sky) 95.24%); }
+#t-wave img { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+
+#t-info-card {
+  left: 66.96px; top: 3838px; width: 610.08px; height: calc(477px + var(--t2, 0px));
+  border: 1px solid #fff; border-radius: 15px; box-shadow: 0 0 30px 0 rgba(255,255,255,0.1), 0 10px 30px -6px rgba(3,15,40,0.28);
+  background-color: rgba(255,255,255,0.10);
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 671 477' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.44999998807907104'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(67.442 47.867 -67.335 204.08 -11.412 10.042)'><stop stop-color='rgba(255,255,255,1)' offset='0'/><stop stop-color='rgba(243,243,243,1)' offset='1'/></radialGradient></defs></svg>");
+  background-size: 100% 100%;
+  -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%);
+}
+#t-infos { left: 94.96px; top: 3877px; width: 554.08px; display: flex; flex-direction: column; align-items: flex-start; gap: 27px; color: var(--info); }
+#t-infos h2 { margin: 0 0 -17px; width: 100%; text-align: center; font: 400 65px/60px var(--f-display); }
+#t-infos .txt { width: 100%; font-weight: 500; white-space: pre-wrap; text-align: center;
+  font-size: calc(var(--pf, 18px) / var(--st, 1)); line-height: calc(var(--pl, 28px) / var(--st, 1)); letter-spacing: 0; }
+#t-infos .txt p { line-height: inherit; }
+#t-cta-info { width: 100%; height: 60px; border-color: #000; filter: drop-shadow(0 0 15px rgba(255,255,255,0.25)); }
+#t-cta-info span { width: 256.593px; font-size: 18px; }
+
+#t-footer-bg { left: -28px; top: 4399px; width: 809px; height: 239px; background: var(--navy); }
+#t-footer-logos { left: 40px; top: 4446px; width: 668px; display: flex; align-items: center; justify-content: center; gap: 436px; }
+#t-footer-logos .expo-w { position: relative; width: 85px; height: 58px; flex-shrink: 0; }
+#t-footer-logos .expo-w img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#t-footer-logos .logo { position: relative; width: 127.705px; height: 52.598px; flex-shrink: 0; }
+#t-footer-logos .logo img { height: 100%; left: 5.07%; top: 0.04%; width: 89.8%; }
+#t-sponsors { left: 18px; top: 4551px; width: 709px; height: 59px; display: flex; align-items: center; justify-content: center; gap: 40px; }
+#t-sponsors .sp { position: relative; flex-shrink: 0; }
+
+/* Menú desplegable del botón hamburguesa (tablet) */
+#t-menu {
+  position: fixed; inset: 0; z-index: 50;
+  padding: env(safe-area-inset-top, 0px) 16px env(safe-area-inset-bottom, 0px);
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(3, 15, 40, 0.86);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+#t-menu[hidden] { display: none; }
+#t-menu ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+#t-menu a { color: var(--paper); font: 500 24px/44px var(--f-body); font-variation-settings: "YOPQ" 300; display: inline-block; transition: transform .3s ease, color .3s ease; }
+#t-menu a:hover, #t-menu a:focus-visible { transform: scale(1.12); color: var(--red-sq); }
+#t-menu-close { position: absolute; top: calc(24px + env(safe-area-inset-top, 0px)); right: 24px; width: 48px; height: 48px; border: 0; background: none; color: var(--paper); font: 400 40px/48px var(--f-body); cursor: pointer; }
+
+/* =====================================================================
+   MÓVIL — copia del frame Figma "iPhone 14 & 15 Pro Max - 3" (430 × 4437).
+   Se usa por debajo de 768px; escala al ancho. Los párrafos mantienen su
+   tamaño real del Figma y, si necesitan más alto, lo de abajo baja (--m1, --m2).
+   ===================================================================== */
+#canvas-m {
+  display: none; position: absolute; left: 0; top: 0;
+  width: 430px; height: calc(4437px + var(--m0, 0px) + var(--mP, 0px) + var(--m1, 0px) + var(--m2, 0px)); background: var(--paper); overflow: hidden;
+  transform-origin: 0 0; transform: scale(var(--sm, 1));
+}
+#canvas-m * { box-sizing: border-box; }
+.mode-m #canvas { display: none; }
+.mode-m #canvas-m { display: block; }
+/* --mP: foto de la expo más baja (formato 16:9) */
+#canvas-m .after-ex { margin-top: var(--m0, 0px); }
+#canvas-m .m-ap { margin-top: calc(var(--m0, 0px) + var(--mP, 0px)); }
+#canvas-m .after-life { margin-top: calc(var(--m0, 0px) + var(--mP, 0px) + var(--m1, 0px)); }
+#canvas-m .after-card { margin-top: calc(var(--m0, 0px) + var(--mP, 0px) + var(--m1, 0px) + var(--m2, 0px)); }
+
+#m-sky-band { left: -53px; top: 2018px; width: 530px; height: calc(1498px + 4px + var(--m1, 0px)); background: var(--sky); }
+#m-sky-grad { left: -14px; top: -31px; width: 465px; height: 302px; background: linear-gradient(to top, #f2ece0, #758984); }
+#m-hero { left: -865.86px; top: 51.62px; width: 1527.831px; height: 1573.141px; }
+#m-hero img { height: 114.37%; left: -6.71%; top: 13.53%; width: 106.74%; }
+#m-sun { left: 124.4px; top: 122.26px; width: 181.199px; height: 181.199px; }
+#m-sun img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transform-origin: 50% 50%; animation: sun-pulse 2.5s ease-in-out infinite; }
+
+#m-expo { position: absolute; left: 21.5px; top: 30.05px; width: 102.569px; height: 56.118px; display: block; transition: transform .3s ease; }
+#m-expo img { height: 113.18%; left: 4.7%; top: -2.09%; width: 89.8%; }
+#m-burger { position: absolute; left: 356.5px; top: 30px; width: 52px; height: 52px; padding: 0; border: 0; background: none; cursor: pointer; transition: transform .3s ease; }
+#m-burger img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#m-expo:hover, #m-expo:focus-visible, #m-burger:hover, #m-burger:focus-visible { transform: scale(1.12); }
+#m-burger:focus-visible, #m-expo:focus-visible { outline: 2px solid var(--nav); outline-offset: 4px; }
+
+#m-brand { left: 38.97px; top: 165.47px; width: 352.054px; display: flex; flex-direction: column; align-items: center; gap: 17px; }
+#m-brand .logo { position: relative; width: 100%; aspect-ratio: 734 / 337; flex-shrink: 0; }
+#m-brand .logo img { height: 100%; left: -0.07%; top: 0.04%; width: 100.08%; }
+#m-cta-hero { width: 260px; height: 58px; border-color: #0c1c40; }
+#m-cta-hero span { width: 256.129px; font-size: 16px; }
+
+#m-exhibition { left: 25.8px; top: 1275px; width: 378.4px; display: flex; flex-direction: column; align-items: center; gap: 37px; word-break: break-word; }
+#m-exhibition h2 { margin: 0; width: 100%; white-space: nowrap; text-align: center; font: 400 60px/34px var(--f-display); letter-spacing: 1.2px; color: var(--ink); }
+#m-exhibition .txt { width: 100%; font-weight: 500; color: var(--ink-body); white-space: pre-wrap;
+  font-size: calc(var(--pf, 18px) / var(--sm, 1)); line-height: calc(var(--pl, 28px) / var(--sm, 1)); letter-spacing: 0; }
+
+.m-sq { position: absolute; transition: transform .4s ease; transform-origin: 50% 50%; }
+.m-sq:hover { transform: scale(1.15); }
+
+#m-photo { left: 25.8px; top: 1733.91px; width: 378.4px; height: 213.06px; border-radius: 5px; transition: transform .5s ease; }
+#m-photo .clip { border-radius: 5px; }
+#m-photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+#m-photo:hover { transform: scale(1.04); }
+#m-photo:hover img { transform: scale(1.06); }
+
+#m-life { left: 25.8px; top: 2169px; width: 378.4px; display: flex; flex-direction: column; align-items: flex-start; gap: 31px; color: var(--navy-text); word-break: break-word; }
+#m-life h2 { margin: 0; width: 100%; font-family: var(--f-display); font-weight: 400; letter-spacing: 1.2px; display: flex; flex-direction: column; justify-content: flex-end; }
+#m-life h2 .l { display: block; line-height: 60px; }
+#m-life h2 .s60 { font-size: 60px; line-height: 60px; }
+#m-life h2 .s90 { font-size: 90px; line-height: 60px; }
+#m-life .txt { width: 100%; font-weight: 500;
+  font-size: calc(var(--pf, 18px) / var(--sm, 1)); line-height: calc(var(--pl, 28px) / var(--sm, 1)); letter-spacing: 0; }
+
+#m-wave { left: -155px; top: 3516px; width: 1264px; height: calc(582px + var(--m2, 0px)); }
+#m-wave .grad { position: absolute; inset: 0; background: linear-gradient(to top, var(--cream) 32.218%, var(--sky) 95.24%); }
+#m-wave img { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+
+#m-portrait { left: 43.5px; top: 3046px; width: 343px; height: 444px; transition: transform .5s ease; }
+#m-portrait img { inset: 0; width: 100%; height: 100%; }
+#m-portrait:hover { transform: scale(1.04); }
+#m-info-card {
+  left: 25.8px; top: 3569px; width: 378.4px; height: calc(477px + var(--m2, 0px));
+  border: 1px solid #fff; border-radius: 15px; box-shadow: 0 0 30px 0 rgba(255,255,255,0.1), 0 10px 30px -6px rgba(3,15,40,0.28);
+  background-color: rgba(255,255,255,0.10);
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 395 477' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.44999998807907104'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(39.702 47.867 -39.639 204.08 -6.7177 10.042)'><stop stop-color='rgba(255,255,255,1)' offset='0'/><stop stop-color='rgba(243,243,243,1)' offset='1'/></radialGradient></defs></svg>");
+  background-size: 100% 100%;
+  -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%);
+}
+#m-infos { left: 45.8px; top: 3593px; width: 338.4px; display: flex; flex-direction: column; align-items: flex-start; gap: 27px; color: var(--info); }
+#m-infos h2 { margin: 0 0 -17px; width: 100%; text-align: center; font: 400 40px/60px var(--f-display); }
+#m-infos .txt { width: 100%; font-weight: 500; white-space: pre-wrap; text-align: center;
+  font-size: calc(var(--pf, 18px) / var(--sm, 1)); line-height: calc(var(--pl, 28px) / var(--sm, 1)); letter-spacing: 0; }
+#m-infos .txt p { line-height: inherit; }
+#m-cta-info { width: 100%; height: 58px; border-color: #000; filter: drop-shadow(0 0 15px rgba(255,255,255,0.25)); }
+#m-cta-info span { width: 256.593px; font-size: 16px; }
+
+#m-footer-bg { left: -56px; top: 4098px; width: 532.798px; height: 338.846px; background: var(--navy); }
+#m-footer-logos { left: 35px; top: 4155px; width: 361px; display: flex; align-items: center; justify-content: center; gap: 145px; }
+#m-footer-logos .expo-w { position: relative; width: 85px; height: 58px; flex-shrink: 0; }
+#m-footer-logos .expo-w img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#m-footer-logos .logo { position: relative; width: 127.705px; height: 52.598px; flex-shrink: 0; }
+#m-footer-logos .logo img { height: 100%; left: 5.07%; top: 0.04%; width: 89.8%; }
+.m-row { position: absolute; display: flex; align-items: center; justify-content: center; }
+.m-row .sp { position: relative; flex-shrink: 0; }
+
+/* =====================================================================
+   BOTONES "GET YOUR TICKETS" — mismas medidas que el botón principal del portafolio,
+   idénticos en todas las versiones (tamaño real en pantalla):
+   hasta 1024px: 195 × 50, texto 14px · desde 1025px: máx(160, 195u) × máx(42, 50u),
+   texto máx(12, 14u), con u = mín(ancho, 1920) / 1920
+   ===================================================================== */
+#cta-hero, #cta-info { width: calc(var(--bw, 195px) / var(--s, 1)); height: calc(var(--bh, 50px) / var(--s, 1)); padding: 0; }
+#t-cta-hero, #t-cta-info { width: calc(var(--bw, 195px) / var(--st, 1)); height: calc(var(--bh, 50px) / var(--st, 1)); padding: 0; }
+#m-cta-hero, #m-cta-info { width: calc(var(--bw, 195px) / var(--sm, 1)); height: calc(var(--bh, 50px) / var(--sm, 1)); padding: 0; }
+/* =====================================================================
+   TÍTULOS — tamaño real en pantalla (lo calcula el script), fluido entre versiones:
+   móvil ≤430: 60 / 60 (master ×1.5) / 40 en proporción · 430→768: suben hasta 70 / 70 / 65
+   tablet 768–1279: 70 / 70 / 65 fijos · desktop 1280→1920: suben hasta 140 / 80 (master 135) / 80
+   Interlineados y espaciado guardan la proporción del Figma de cada versión (en em).
+   ===================================================================== */
+#exhibition h2 { font-size: calc(var(--hE, 140px) / var(--s, 1)); line-height: 0.2429em; height: 0.6143em; letter-spacing: 0.02em; }
+#life h2 { font-size: calc(var(--hL, 80px) / var(--s, 1)); }
+#life h2 .s80 { font-size: 1em; line-height: 1.1125em; letter-spacing: 0.02em; }
+#life h2 .s90 { font-size: 1.125em; line-height: 0.9889em; letter-spacing: 0.02em; }
+#life h2 .s135 { font-size: 1.6875em; line-height: 0.6593em; letter-spacing: 0.02em; }
+#infos h2 { font-size: calc(var(--hI, 80px) / var(--s, 1)) !important; line-height: 1.05em !important; height: auto !important; text-wrap: balance; }
+#t-exhibition h2 { font-size: calc(var(--hE, 70px) / var(--st, 1)); line-height: 0.4857em; letter-spacing: 0.02em; }
+#t-life h2 { font-size: calc(var(--hL, 70px) / var(--st, 1)); line-height: 0.8571em; letter-spacing: 0.02em; }
+#t-infos h2 { font-size: calc(var(--hI, 65px) / var(--st, 1)); line-height: 0.9231em; }
+#m-exhibition h2 { font-size: calc(var(--hE, 60px) / var(--sm, 1)); line-height: 0.5667em; letter-spacing: 0.02em; }
+#m-life h2 { font-size: calc(var(--hL, 60px) / var(--sm, 1)); letter-spacing: 0.02em; }
+#m-life h2 .s60 { font-size: 1em; line-height: 1em; }
+#m-life h2 .s90 { font-size: 1.5em; line-height: 0.6667em; }
+#m-infos h2 { font-size: calc(var(--hI, 40px) / var(--sm, 1)); line-height: 1.5em; }
+
+/* Borde de 2px y esquinas de 10px reales en pantalla, iguales en todas las versiones */
+/* El borde se dibuja como sombra interior para que mida 2px exactos (el navegador redondea border-width) */
+#cta-hero, #t-cta-hero, #m-cta-hero { --bc: #0c1c40; }
+#cta-info, #t-cta-info, #m-cta-info { --bc: #000; }
+.btn:hover, .btn:focus-visible { --bc: var(--red); }
+#cta-hero, #cta-info { border-width: 0; border-radius: calc(10px / var(--s, 1)); box-shadow: inset 0 0 0 calc(2px / var(--s, 1)) var(--bc); }
+#t-cta-hero, #t-cta-info { border-width: 0; border-radius: calc(10px / var(--st, 1)); box-shadow: inset 0 0 0 calc(2px / var(--st, 1)) var(--bc); }
+#m-cta-hero, #m-cta-info { border-width: 0; border-radius: calc(10px / var(--sm, 1)); box-shadow: inset 0 0 0 calc(2px / var(--sm, 1)) var(--bc); }
+/* Tarjeta glass en desktop: 15px reales de radio en cualquier pantalla */
+#info-card { border-radius: calc(15px / var(--s, 1)); }
+#t-cta-info, #m-cta-info { align-self: center; }
+#m-infos #m-cta-info { width: 100%; align-self: stretch; }
+#cta-hero span, #cta-info span { width: auto; height: auto; font-size: calc(var(--bf, 14px) / var(--s, 1)); line-height: 1.2; letter-spacing: calc(0.3px / var(--s, 1)); white-space: nowrap; }
+#t-cta-hero span, #t-cta-info span { width: auto; height: auto; font-size: calc(var(--bf, 14px) / var(--st, 1)); line-height: 1.2; letter-spacing: calc(0.3px / var(--st, 1)); white-space: nowrap; }
+#m-cta-hero span, #m-cta-info span { width: auto; height: auto; font-size: calc(var(--bf, 14px) / var(--sm, 1)); line-height: 1.2; letter-spacing: calc(0.3px / var(--sm, 1)); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  #m-sun img { animation: none; }
+  #m-photo, #m-portrait, #m-photo img, .m-sq, #m-expo, #m-burger { transition: none; }
+  #t-sun img { animation: none; }
+  #t-photo, #t-portrait, #t-photo img, .t-sq, #t-expo, #t-burger { transition: none; }
+  #sun img { animation: none; }
+  .reveal.in { animation: none; }
+  .btn, #photo, #portrait, #photo img, #nav .expo, #nav ul a, .sq { transition: none; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+[hidden]{display:none!important}
+img{max-width:100%}
