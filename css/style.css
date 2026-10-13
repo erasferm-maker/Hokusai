@@ -453,5 +453,3 @@ a { color: inherit; text-decoration: none; }
   .btn, #photo, #portrait, #photo img, #nav .expo, #nav ul a, .sq { transition: none; }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-[hidden]{display:none!important}
-img{max-width:100%}
